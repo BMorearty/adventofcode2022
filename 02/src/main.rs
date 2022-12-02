@@ -31,7 +31,7 @@ fn win_lose_draw_score(theirs: &str, mine: &str) -> u32 {
     return scores[&combined];
 }
 
-fn calc_score(mine_func: fn(&str) -> (&str, &str)) -> u32 {
+fn calc_score(mine_func: fn(line: &str) -> (&str, &str)) -> u32 {
     let values: HashMap<String, u32> = map! {"X": 1u32, "Y": 2u32, "Z": 3u32};
     let file = fs::File::open(FILENAME).expect("No such file");
     let mut buf = io::BufReader::new(file);
