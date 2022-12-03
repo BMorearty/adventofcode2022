@@ -1,11 +1,11 @@
 use std::fs::File;
 use std::io::SeekFrom::Start;
 use std::io::{BufRead, Read, Seek};
-use std::{env, fs, io};
+use std::{env, io};
 
 fn main() {
     let filename = get_filename();
-    let file = fs::File::open(filename).expect("No such file");
+    let file = File::open(filename).expect("No such file");
     let mut buf = io::BufReader::new(file);
     part1(&mut buf);
     let _ = buf.seek(Start(0));
