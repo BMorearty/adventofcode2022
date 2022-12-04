@@ -8,7 +8,7 @@ fn main() {
     let file = fs::File::open(filename).expect("No such file");
     let mut buf = io::BufReader::new(file);
     part1(&mut buf);
-    let _ = buf.seek(Start(0));
+    buf.seek(Start(0)).expect("Unable to seek to start of file");
     part2(&mut buf);
 }
 
