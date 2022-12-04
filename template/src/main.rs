@@ -19,6 +19,14 @@ fn get_filename() -> String {
         .to_string()
 }
 
-fn part1(buf: &mut io::BufReader<File>) {}
+fn part1(buf: &mut io::BufReader<File>) {
+    for line in buf.by_ref().lines() {
+        let line = line.expect("Unable to read file");
+    }
+}
 
-fn part2(buf: &mut io::BufReader<File>) {}
+fn part2(buf: &mut io::BufReader<File>) {
+    for line in buf.by_ref().lines() {
+        let line = line.expect("Unable to read file");
+    }
+}
