@@ -1,0 +1,14 @@
+lockfileVersion: 5.4
+
+specifiers:
+  process: ^0.11.10
+
+dependencies:
+  process: 0.11.10
+
+packages:
+
+  /process/0.11.10:
+    resolution: {integrity: sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==}
+    engines: {node: '>= 0.6.0'}
+    dev: false
