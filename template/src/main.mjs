@@ -1,5 +1,6 @@
 import process from 'process';
 import fs from 'fs';
+import _ from 'lodash';
 
 const filename = process.argv[2];
 const contents = fs.readFileSync(filename, 'utf8');

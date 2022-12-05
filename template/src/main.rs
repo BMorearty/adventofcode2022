@@ -1,4 +1,4 @@
-use std::io::{BufRead, Seek};
+use std::io::{BufRead, Read, Seek};
 use std::{env, fs, io};
 use std::fs::File;
 use std::io::SeekFrom::Start;
