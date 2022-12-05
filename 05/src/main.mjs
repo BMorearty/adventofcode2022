@@ -9,7 +9,7 @@ let crateNums = lines.find((line) => crateNumsRegex.exec(line));
 let crateCount = parseInt(/(\d+)\s*$/.exec(crateNums)[1])
 
 function solve(move) {
-  let crates = Array(crateCount);
+  let crates = Array.from(Array(crateCount), () => []);
 
   // Fill the crates
   for (const line of lines) {
@@ -19,7 +19,6 @@ function solve(move) {
     let matches = line.matchAll(/\[[A-Z]]/g);
     for (const match of matches) {
       const crate = match.index / 4;
-      crates[crate] = crates[crate] || [];
       crates[crate].unshift(match[0][1]);
     }
   }
