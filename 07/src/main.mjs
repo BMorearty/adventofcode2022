@@ -17,6 +17,18 @@ class Dir {
     this.parent = parent;
   }
 
+  allDirs() {
+    const parent = this;
+    return {
+      *[Symbol.iterator]() {
+        yield parent;
+        for (const child of parent.subdirs) {
+          yield *child.allDirs();
+        }
+      }
+    }
+  }
+
   addSubdir(name) {
     this.subdirs.push(new Dir(name, this));
   }
@@ -69,12 +81,10 @@ const run = (function() {
   }
 
   function part2(dir, remaining, smallestSoFar) {
-    if (!smallestSoFar || (dir.size >= remaining && dir.size < smallestSoFar.size)) {
-      smallestSoFar = dir;
-    }
-
-    for (const subdir of dir.subdirs) {
-      smallestSoFar = part2(subdir, remaining, smallestSoFar);
+    for (const subdir of dir.allDirs()) {
+      if (!smallestSoFar || (subdir.size >= remaining && subdir.size < smallestSoFar.size)) {
+        smallestSoFar = subdir;
+      }
     }
 
     return smallestSoFar;
