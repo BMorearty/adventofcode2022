@@ -42,7 +42,7 @@ function visible(forest) {
   return count;
 }
 
-function highest(forest) {
+function bestView(forest) {
   let highestScore = 0;
   for (let row in forest) {
     row = Number(row);
@@ -96,7 +96,7 @@ async function run() {
   }
 
   console.log(`Part 1: ${visible(forest)}`);
-  console.log(`Part 2: ${highest(forest)}`);
+  console.log(`Part 2: ${bestView(forest)}`);
 }
 
 await run();
