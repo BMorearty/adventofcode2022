@@ -1,109 +1,22 @@
-let big = [
-  {
-    items: [91n, 58n, 52n, 69n, 95n, 54n],
-    op: ['*', 13n],
-    test: 7n,
-    true: 1,
-    false: 5,
-    inspected: 0,
-  },
-  {
-    items: [80n, 80n, 97n, 84n],
-    op: ['*', 'old'],
-    test: 3n,
-    true: 3,
-    false: 5,
-    inspected: 0,
-  },
-  {
-    items: [86n, 92n, 71n],
-    op: ['+', 7n],
-    test: 2n,
-    true: 0,
-    false: 4,
-    inspected: 0,
-  },
-  {
-    items: [96n, 90n, 99n, 76n, 79n, 85n, 98n, 61n],
-    op: ['+', 4n],
-    test: 11n,
-    true: 7,
-    false: 6,
-    inspected: 0,
-  },
-  {
-    items: [60n, 83n, 68n, 64n, 73n],
-    op: ['*', 19n],
-    test: 17n,
-    true: 1,
-    false: 0,
-    inspected: 0,
-  },
-  {
-    items: [96n, 52n, 52n, 94n, 76n, 51n, 57n],
-    op: ['+', 3n],
-    test: 5n,
-    true: 7,
-    false: 3,
-    inspected: 0,
-  },
-  {
-    items: [75n],
-    op: ['+', 5n],
-    test: 13n,
-    true: 4,
-    false: 2,
-    inspected: 0,
-  },
-  {
-    items: [83n, 75n],
-    op: ['+', 1n],
-    test: 19n,
-    true: 2,
-    false: 6,
-    inspected: 0,
-  }
-];
-
-// small
-let small = [
-  {
-    items: [79n, 98n],
-    op: ['*', 19n],
-    test: 23n,
-    true: 2,
-    false: 3,
-    inspected: 0,
-  },
-  {
-    items: [54n, 65n, 75n, 74n],
-    op: ['+', 6n],
-    test: 19n,
-    true: 2,
-    false: 0,
-    inspected: 0,
-  },
-  {
-    items: [79n, 60n, 97n],
-    op: ['*', 'old'],
-    test: 13n,
-    true: 1,
-    false: 3,
-    inspected: 0,
-  },
-  {
-    items: [74n],
-    op: ['+', 3n],
-    test: 17n,
-    true: 0,
-    false: 1,
-    inspected: 0,
-  },
-];
+import process from "process";
+import fs from "fs";
 
 async function run(part, div, times) {
-  // Clone it so part 1 doesn't corrupt part 2
-  let m = [...big];
+  const filename = process.argv[2];
+  const c = fs.readFileSync(filename, 'utf8');
+  const monkeys = c.split('\n\n');
+  const m = monkeys.map(monkey => {
+    const regex = /.+?: ([\d, ]+?)\s+.+?([+*]) ([0-9]+|old)\s+.+?(\d+)\s+.+?(\d+)\s+.+?(\d+)/im;
+    const match = monkey.match(regex);
+    return {
+      items: match[1].split(', ').map(s => BigInt(s)),
+      op: [match[2], match[3] === "old" ? match[3] : BigInt(match[3])],
+      test: BigInt(match[4]),
+      true: +match[5],
+      false: +match[6],
+      inspected: 0,
+    }
+  });
 
   // I didn't figure this part out. Got it from
   // https://github.com/nthistle/advent-of-code/blob/master/2022/day11/day11.py
